@@ -1,9 +1,18 @@
 //
 //  Asserts.swift
-//  Pods
+//  Smock
 //
-//  Created by Boris Erceg on 03/04/2017.
-//
+//  Created by kviksilver on 04/03/2017.
+//  Copyright (c) 2017 kviksilver. All rights reserved.
 //
 
 import Foundation
+import XCTest
+
+func XCTAssertSelectorCalls<T: SmockedType>(_ mockType: T.Type, _ selector: Selector, _ calls: Int, _ message: String = "Selector was not called desired number of times", file: StaticString = #file, line: UInt = #line) {
+    XCTAssertEqual(mockType.numberOfCallsForSelector(selector), calls, message, file: file, line: line)
+}
+
+func XCTAssertSelectorCalls<T: SmockedObject>(_ mock: T, _ selector: Selector, _ calls: Int, _ message: String = "Selector was not called desired number of times", file: StaticString = #file, line: UInt = #line) {
+    XCTAssertEqual(mock.numberOfCallsForSelector(selector), calls, message, file: file, line: line)
+}

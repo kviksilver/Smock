@@ -1,15 +1,15 @@
 //
-//  MockStorage.swift
-//  Pods
+//  Smockswift
+//  Smock
 //
-//  Created by Boris Erceg on 03/04/2017.
-//
+//  Created by kviksilver on 04/03/2017.
+//  Copyright (c) 2017 kviksilver. All rights reserved.
 //
 
 import Foundation
 
-struct MockStorage {
+struct SmockStorage {
     var selectors = [String: Int]()
-    var params = [String: [Any]]()
-    var returnValues = [String: Any]()
+    var params = [String: [Any?]]()
+    var returnValues = [String: Any?]()
 }
