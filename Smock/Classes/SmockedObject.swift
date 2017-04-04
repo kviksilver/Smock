@@ -8,12 +8,14 @@
 
 import Foundation
 
-protocol SmockedObject: class {
+public protocol SmockedObject: class {
 
     var hashValue: Int { get }
 
     func registerSelectorCall(_ selector: Selector, params: [Any?]?)
     func registerSelectorCall(_ selector: Selector)
+    func registerSelectorCall<T>(_ selector: Selector) -> T?
+    func registerSelectorCall<T>(_ selector: Selector, params: [Any?]?) -> T?
 
     func numberOfCallsForSelector(_ selector: Selector) -> Int
     func parametersForSelector(_ selector: Selector) -> [Any?]?
@@ -21,15 +23,13 @@ protocol SmockedObject: class {
     func stubbedValueForSelector<T>(_ selector: Selector) -> T?
     func stubValueForSelector(_ selector: Selector, _ value: Any?)
 
-    func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector) -> T?
-    func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector, params: [Any?]?) -> T?
 
     func stopMocking()
     
 }
 
 
-extension SmockedObject {
+public extension SmockedObject {
 
     var key: String { return "\(self.hashValue)" }
 
@@ -58,10 +58,6 @@ extension SmockedObject {
         return Smock.mocks[key]?.params[selector.key()]
     }
 
-    func stopMocking() {
-        Smock.mocks[key] = nil
-    }
-
     func stubbedValueForSelector<T>(_ selector: Selector) -> T? {
         return Smock.mocks[key]?.returnValues[selector.key()] as? T
     }
@@ -69,4 +65,10 @@ extension SmockedObject {
     func stubValueForSelector(_ selector: Selector, _ value: Any?) {
         Smock.stubValueForKey(key: key, selector: selector, value: value)
     }
+
+    func stopMocking() {
+        Smock.mocks[key] = nil
+    }
 }
+
+

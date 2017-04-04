@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Smock {
+struct Smock {
     static var mockedObjectShouldLog = false
     static var mocks = [String: SmockStorage]()
 
@@ -50,4 +50,5 @@ class Smock {
         storage.returnValues[selector.key()] = value
         mocks[key] = storage
     }
+
 }

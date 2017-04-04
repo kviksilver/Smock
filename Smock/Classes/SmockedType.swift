@@ -8,10 +8,12 @@
 
 import Foundation
 
-protocol SmockedType: class {
+public protocol SmockedType: class {
 
     static func registerSelectorCall(_ selector: Selector, params: [Any?]?)
     static func registerSelectorCall(_ selector: Selector)
+    static func registerSelectorCall<T>(_ selector: Selector) -> T?
+    static func registerSelectorCall<T>(_ selector: Selector, params: [Any?]?) -> T?
 
     static func numberOfCallsForSelector(_ selector: Selector) -> Int
     static func parametersForSelector(_ selector: Selector) -> [Any?]?
@@ -19,13 +21,10 @@ protocol SmockedType: class {
     static func stubbedValueForSelector<T>(_ selector: Selector) -> T?
     static func stubValueForSelector(_ selector: Selector, _ value: Any?)
 
-    static func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector) -> T?
-    static func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector, params: [Any?]?) -> T?
-
     static func stopMocking()
 }
 
-extension SmockedType {
+public extension SmockedType {
 
     static var key: String {
         let string = String(describing: self)
@@ -40,11 +39,11 @@ extension SmockedType {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
     }
 
-    static func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector) -> T? {
-        return registerSelectorCallAndReturnStubbedValue(selector, params: nil)
+    static func registerSelectorCall<T>(_ selector: Selector) -> T? {
+        return registerSelectorCall(selector, params: nil)
     }
 
-    static func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector, params: [Any?]?) -> T? {
+    static func registerSelectorCall<T>(_ selector: Selector, params: [Any?]?) -> T? {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
         return stubbedValueForSelector(selector)
     }
@@ -57,16 +56,16 @@ extension SmockedType {
         return Smock.mocks[key]?.params[selector.key()]
     }
 
-    static func stopMocking() {
-        Smock.mocks[key] = nil
-    }
-
     static func stubbedValueForSelector<T>(_ selector: Selector) -> T? {
         return Smock.mocks[key]?.returnValues[selector.key()] as? T
     }
 
     static func stubValueForSelector(_ selector: Selector, _ value: Any?) {
         Smock.stubValueForKey(key: key, selector: selector, value: value)
+    }
+
+    static func stopMocking() {
+        Smock.mocks[key] = nil
     }
     
 }
