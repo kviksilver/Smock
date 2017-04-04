@@ -1,0 +1,16 @@
+PODS:
+  - Smock (0.1.0)
+
+DEPENDENCIES:
+  - Smock (from `../`)
+
+EXTERNAL SOURCES:
+  Smock:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Smock: 0ff46aed643e7ba6d2bb674c5e4447ea9402b209
+
+PODFILE CHECKSUM: 2f97a39a9f17d71b8b4f1b1b7271e514d996a507
+
+COCOAPODS: 1.2.0
