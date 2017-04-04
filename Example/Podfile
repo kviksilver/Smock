@@ -5,7 +5,5 @@ target 'Smock_Example' do
 
   target 'Smock_Tests' do
     inherit! :search_paths
-
-    
   end
 end
