@@ -4,4 +4,4 @@ podfile: Example/Podfile
 before_install:
 - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Smock.xcworkspace -scheme Smock-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/Smock.xcworkspace -scheme Smock-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' | xcpretty
