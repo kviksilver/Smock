@@ -8,20 +8,36 @@
 
 import Foundation
 
-
-struct Smock {
-    static var mockedObjectShouldLog = false
-    static var mocks = [String: SmockStorage]()
-
-    static func registerSelectorForKey(key: String, params: [Any?]?, selector: Selector) {
-        if mockedObjectShouldLog {
-            print("##############################################################")
-            print("registering selector: \(selector.key())")
-            print("for key: \(key)")
-            print("with params: \(String(describing: params?.debugDescription))")
-            print("##############################################################")
+public enum LogLevel {
+    case quiet
+    case verbose
+    
+    fileprivate func log(_ string: String) {
+        switch self {
+        case .verbose:
+            print(string)
+        default:
+            break
         }
+    }
+}
 
+public struct Smock {
+    
+    /// Marks log level for library
+    public static var logLevel = LogLevel.quiet
+    
+    static var mocks = [String: SmockStorage]()
+    
+    static func registerSelectorForKey(key: String, params: [Any?]?, selector: Selector) {
+        
+        logLevel.log("##############################################################")
+        logLevel.log("registering selector: \(selector.key())")
+        logLevel.log("for key: \(key)")
+        logLevel.log("with params: \(String(describing: params?.debugDescription))")
+        logLevel.log("##############################################################")
+        
+        
         guard var storage = mocks[key] else {
             mocks[key] = SmockStorage()
             return registerSelectorForKey(key: key, params: params, selector: selector)
@@ -35,13 +51,12 @@ struct Smock {
     }
 
     static func stubValueForKey(key: String, selector: Selector, value: Any?) {
-        if mockedObjectShouldLog {
-            print("##############################################################")
-            print("stubbinn value: \(value.debugDescription)")
-            print("for key: \(key)")
-            print("with selector: \(selector.key())")
-            print("##############################################################")
-        }
+        logLevel.log("##############################################################")
+        logLevel.log("stubbinn value: \(value.debugDescription)")
+        logLevel.log("for key: \(key)")
+        logLevel.log("with selector: \(selector.key())")
+        logLevel.log("##############################################################")
+        
 
         guard var storage = mocks[key] else {
             mocks[key] = SmockStorage()
