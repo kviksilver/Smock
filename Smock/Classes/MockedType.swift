@@ -10,10 +10,12 @@ import Foundation
 
 public protocol MockedType: class {
 
-    static func registerSelectorCall(_ selector: Selector, params: [Any?]?)
-    static func registerSelectorCall(_ selector: Selector)
-    static func registerSelectorCall<T>(_ selector: Selector) -> T?
-    static func registerSelectorCall<T>(_ selector: Selector, params: [Any?]?) -> T?
+    static func registerSelector(_ selector: Selector, params: [Any?]?)
+    static func registerSelector(_ selector: Selector)
+    
+    
+    static func registerSelector<T>(_ selector: Selector) -> T?
+    static func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T?
 
     static func numberOfCallsForSelector(_ selector: Selector) -> Int
     static func parametersForSelector(_ selector: Selector) -> [Any?]?
@@ -31,19 +33,19 @@ public extension MockedType {
         return string.components(separatedBy: ".").last ?? string
     }
 
-    static func registerSelectorCall(_ selector: Selector) {
-        registerSelectorCall(selector, params: nil)
+    static func registerSelector(_ selector: Selector) {
+        registerSelector(selector, params: nil)
     }
 
-    static func registerSelectorCall(_ selector: Selector, params: [Any?]?) {
+    static func registerSelector(_ selector: Selector, params: [Any?]?) {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
     }
 
-    static func registerSelectorCall<T>(_ selector: Selector) -> T? {
-        return registerSelectorCall(selector, params: nil)
+    static func registerSelector<T>(_ selector: Selector) -> T? {
+        return registerSelector(selector, params: nil)
     }
 
-    static func registerSelectorCall<T>(_ selector: Selector, params: [Any?]?) -> T? {
+    static func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T? {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
         return stubbedValueForSelector(selector)
     }

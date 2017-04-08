@@ -14,6 +14,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* TestingProtocolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* TestingProtocolExtensions.swift */; };
+		EC35BE991E9938D000C3A4FD /* ProtocolUnderTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC35BE981E9938D000C3A4FD /* ProtocolUnderTestMock.swift */; };
 		ECB486C41E94AFBC00D9A13F /* ProtocolUnderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB486C21E94A30A00D9A13F /* ProtocolUnderTest.swift */; };
 		FE2BEC220CB46E7320FAA9DC /* Pods_Smock_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472CE51FA05F1DB161BA9AF3 /* Pods_Smock_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		DB5D90C19CE915987D6020A4 /* Pods-Smock_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smock_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smock_Example/Pods-Smock_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EC35BE941E99331C00C3A4FD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EC35BE961E99332600C3A4FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC35BE981E9938D000C3A4FD /* ProtocolUnderTestMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolUnderTestMock.swift; sourceTree = "<group>"; };
 		ECB486C21E94A30A00D9A13F /* ProtocolUnderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolUnderTest.swift; sourceTree = "<group>"; };
 		FE9AD03237063B3E4C01A0E6 /* Pods-Smock_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smock_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Smock_Tests/Pods-Smock_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* TestingProtocolExtensions.swift */,
+				EC35BE981E9938D000C3A4FD /* ProtocolUnderTestMock.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -378,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC35BE991E9938D000C3A4FD /* ProtocolUnderTestMock.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* TestingProtocolExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
