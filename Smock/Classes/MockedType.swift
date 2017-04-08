@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol SmockedType: class {
+public protocol MockedType: class {
 
     static func registerSelectorCall(_ selector: Selector, params: [Any?]?)
     static func registerSelectorCall(_ selector: Selector)
@@ -24,7 +24,7 @@ public protocol SmockedType: class {
     static func stopMocking()
 }
 
-public extension SmockedType {
+public extension MockedType {
 
     static var key: String {
         let string = String(describing: self)

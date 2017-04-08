@@ -67,3 +67,5 @@ public struct Smock {
     }
 
 }
+
+public protocol Mock: MockedType, MockedObject {}

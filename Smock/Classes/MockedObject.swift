@@ -8,14 +8,14 @@
 
 import Foundation
 
-public protocol SmockedObject: class {
+public protocol MockedObject: class {
 
     var hashValue: Int { get }
 
-    func registerSelectorCall(_ selector: Selector, params: [Any?]?)
-    func registerSelectorCall(_ selector: Selector)
-    func registerSelectorCall<T>(_ selector: Selector) -> T?
-    func registerSelectorCall<T>(_ selector: Selector, params: [Any?]?) -> T?
+    func registerSelector(_ selector: Selector)
+    func registerSelector(_ selector: Selector, params: [Any?]?)
+    func registerSelector<T>(_ selector: Selector) -> T?
+    func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T?
 
     func numberOfCallsForSelector(_ selector: Selector) -> Int
     func parametersForSelector(_ selector: Selector) -> [Any?]?
@@ -23,29 +23,27 @@ public protocol SmockedObject: class {
     func stubbedValueForSelector<T>(_ selector: Selector) -> T?
     func stubValueForSelector(_ selector: Selector, _ value: Any?)
 
-
     func stopMocking()
-    
 }
 
 
-public extension SmockedObject {
+public extension MockedObject {
 
     var key: String { return "\(self.hashValue)" }
 
-    func registerSelectorCall(_ selector: Selector) {
-        registerSelectorCall(selector, params: nil)
+    func registerSelector(_ selector: Selector) {
+        registerSelector(selector, params: nil)
     }
 
-    func registerSelectorCall(_ selector: Selector, params: [Any?]?) {
+    func registerSelector(_ selector: Selector, params: [Any?]?) {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
     }
 
-    func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector) -> T? {
-        return registerSelectorCallAndReturnStubbedValue(selector, params: nil)
+    func registerSelector<T>(_ selector: Selector) -> T? {
+        return registerSelector(selector, params: nil)
     }
 
-    func registerSelectorCallAndReturnStubbedValue<T>(_ selector: Selector, params: [Any?]?) -> T? {
+    func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T? {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
         return stubbedValueForSelector(selector)
     }
