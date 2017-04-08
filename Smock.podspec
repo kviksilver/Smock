@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary          = 'Makes mocking in Swift easier'
 
   s.description      = <<-DESC
-Smock makes mocking objects in swift easier by providing capability to record selector calls, parameters and stub return values
+Smock makes testing protocol extensions in Swift easier by providing capability to record selector calls, parameters and stub return values
                        DESC
 
   s.homepage         = 'https://github.com/kviksilver/Smock'
