@@ -13,7 +13,9 @@ import Foundation
 /// - quiet: no logs generated
 /// - verbose: logs every selector registration and return value stub setting to console
 public enum LogLevel {
+    /// no logs generated
     case quiet
+    /// logs every selector registration and return value stub setting to console
     case verbose
 
     fileprivate func log(_ string: String) {
@@ -26,6 +28,7 @@ public enum LogLevel {
     }
 }
 
+/// Entry point for library, used for setting log level
 public struct Smock {
 
     /// Marks log level for library
