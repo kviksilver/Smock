@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// Log level for Smock
+///
+/// - quiet: no logs generated
+/// - verbose: logs every selector registration and return value stub setting to console
 public enum LogLevel {
     case quiet
     case verbose
@@ -68,4 +72,5 @@ public struct Smock {
 
 }
 
+/// Umbrella protocol for both type and object
 public protocol Mock: MockedType, MockedObject {}
