@@ -18,20 +18,20 @@ public protocol MockedObject: class {
     ///
     /// - Parameter selector: selector to register `#selector(functionSelector)`
     func registerSelector(_ selector: Selector)
-    
+
     /// Registers selector call with parameters
     ///
     /// - Parameters:
     ///   - selector: selector to register `#selector(functionSelector(params:))`
     ///   - params: array of parameters received in function
     func registerSelector(_ selector: Selector, params: [Any?]?)
-    
+
     /// Registers simple selector call and returns stubbed value
     ///
     /// - Parameter selector: selector to register `#selector(functionSelector)`
     /// - Returns: value stubbed with `stubValueForSelector`
     func registerSelector<T>(_ selector: Selector) -> T?
-    
+
     /// Registers selector call with parameters and returns stubbed value
     ///
     /// - Parameters:
@@ -45,7 +45,7 @@ public protocol MockedObject: class {
     /// - Parameter selector: selector to query against `#selector(functionSelector)`
     /// - Returns: number of calls made for given selector on this mock
     func numberOfCallsForSelector(_ selector: Selector) -> Int
-    
+
     /// Queries for parameters passed to given selector on its last invocation
     ///
     /// - Parameter selector: selector to query against `#selector(functionSelector)`
@@ -57,7 +57,7 @@ public protocol MockedObject: class {
     /// - Parameter selector: selector to query against `#selector(functionSelector)`
     /// - Returns: stubbed value
     func stubbedValueForSelector<T>(_ selector: Selector) -> T?
-    
+
     /// Stub value for given selector
     ///
     /// - Parameters:
@@ -68,7 +68,6 @@ public protocol MockedObject: class {
     /// Stop mocking given object. Will clear stubbed return values, selector calls and parameters
     func stopMocking()
 }
-
 
 public extension MockedObject {
 
@@ -111,5 +110,3 @@ public extension MockedObject {
         Smock.mocks[key] = nil
     }
 }
-
-
