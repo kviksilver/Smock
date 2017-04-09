@@ -9,9 +9,7 @@ Smock makes testing protocol extensions in Swift easier by providing capability 
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-Look for `ProtocolUnderTest`, `ProtocolUnderTestMock` and `TestingProtocolExtensions` in example project for more details.
+Look for `ProtocolUnderTest`, `ProtocolUnderTestMock` and `TestingProtocolExtensions` in Tests for more details.
 
 Basic example:
 
