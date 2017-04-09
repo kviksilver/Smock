@@ -3,4 +3,5 @@ osx_image: xcode8.3
 env:
   - TOOLCHAINS=swift
 script:
-  - swift build --fetch
+  - swiftlint
+  - swift test
