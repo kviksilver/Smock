@@ -7,12 +7,42 @@
 
 Smock makes testing protocol extensions in Swift easier by providing capability to record selector calls, parameters and stub return values
 
-
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-Look for `ProtocolUnderTest`, `ProtocolUnderTestMock` and `TestingProtocolExtensions` in example project 
+Look for `ProtocolUnderTest`, `ProtocolUnderTestMock` and `TestingProtocolExtensions` in example project for more details.
+
+Basic example:
+
+Protocol defines following interface
+```Swift
+protocol ProtocolUnderTest: class {
+    func functionToTest()
+    func functionToImplement()
+}
+```
+
+Extension implements `functionToTest` that calls `functionToImplement` 
+```Swift
+extension ProtocolUnderTest {
+    func functionToTest() {
+        functionToImplement()
+    }
+}    
+```
+
+To test that extension actually does required work (on our case function call) we create a mock in test target that conforms to `ProtocolUnderTest` and `Mock` protocols, implement required `functionToImplement` as follows:
+
+```swift
+class ProtocolUnderTestMock: NSObject, ProtocolUnderTest, Mock {}
+extension ProtocolUnderTestMock {
+    func functionToImplement() {
+        registerSelector(#selector(functionToImplement))
+    }
+}
+```
+
 
 ## Requirements
 
