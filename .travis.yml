@@ -3,6 +3,8 @@ osx_image: xcode8.3
 env:
   - TOOLCHAINS=swift
 script:
-  - set -o pipefail && xcodebuild test -project Smock.xcodeproj -scheme Smock -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' | xcpretty
- - set -o pipefail && xcodebuild test -project Smock.xcodeproj -scheme Smock -sdk appletvsimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=tvOS Simulator,name=Apple TV 1080p' | xcpretty
- - set -o pipefail && xcodebuild test clean -project Smock.xcodeproj -scheme Smock -sdk macosx10.12 ONLY_ACTIVE_ARCH=NO | xcpretty
+  - set -o pipefail && xcodebuild test -project Smock.xcodeproj -scheme Smock -derivedDataPath ./.build/-sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' | xcpretty
+ - set -o pipefail && xcodebuild test -project Smock.xcodeproj -scheme Smock -derivedDataPath ./.build/ -sdk appletvsimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=tvOS Simulator,name=Apple TV 1080p' | xcpretty
+ - set -o pipefail && xcodebuild test clean -project Smock.xcodeproj -scheme Smock -derivedDataPath ./.build/ -sdk macosx10.12 ONLY_ACTIVE_ARCH=NO | xcpretty
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -D ./.build/
