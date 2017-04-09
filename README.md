@@ -46,6 +46,8 @@ extension ProtocolUnderTestMock {
 
 ## Installation
 
+### Cocoapods
+
 Smock is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
@@ -53,6 +55,22 @@ it, simply add the following line to your Podfile:
 pod "Smock"
 ```
 
+### Swift Package Manager
+
+Swift Package Manager
+
+To use Swift Package Manager try adding following to your Package.swift file:
+
+```swift
+import PackageDescription
+let package = Package(
+    name: "YOUR_PROJECT_NAME",
+    targets: [],
+    dependencies: [
+        .Package(url: "https://github.com/kviksilver/Smock.git", majorVersion: 0),
+    ]
+    )
+```
 ## Author
 
 kviksilver, berceg@gmail.com
