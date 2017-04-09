@@ -14,6 +14,6 @@ Smock makes testing protocol extensions in Swift easier by providing capability 
   s.social_media_url = 'https://twitter.com/kviksilver'
 
   s.ios.deployment_target = '9.0'
-  s.source_files = 'Smock/Classes/**/*'
+  s.source_files = 'Sources/**/*'
   s.frameworks = 'XCTest', 'Foundation'
 end

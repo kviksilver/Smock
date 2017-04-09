@@ -1,6 +1,5 @@
 import UIKit
 import XCTest
-@testable import Smock_Example
 import Smock
 
 

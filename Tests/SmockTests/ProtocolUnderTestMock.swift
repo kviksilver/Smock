@@ -7,7 +7,6 @@
 //
 
 import Foundation
-@testable import Smock_Example
 import Smock
 
 class ProtocolUnderTestMock: NSObject, ProtocolUnderTest, Mock {}
