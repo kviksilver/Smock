@@ -8,10 +8,16 @@
 
 import Foundation
 
+/// Log level for Smock
+///
+/// - quiet: no logs generated
+/// - verbose: logs every selector registration and return value stub setting to console
 public enum LogLevel {
+    /// no logs generated
     case quiet
+    /// logs every selector registration and return value stub setting to console
     case verbose
-    
+
     fileprivate func log(_ string: String) {
         switch self {
         case .verbose:
@@ -22,22 +28,22 @@ public enum LogLevel {
     }
 }
 
+/// Entry point for library, used for setting log level
 public struct Smock {
-    
+
     /// Marks log level for library
     public static var logLevel = LogLevel.quiet
-    
+
     static var mocks = [String: SmockStorage]()
-    
+
     static func registerSelectorForKey(key: String, params: [Any?]?, selector: Selector) {
-        
+
         logLevel.log("##############################################################")
         logLevel.log("registering selector: \(selector.key())")
         logLevel.log("for key: \(key)")
         logLevel.log("with params: \(String(describing: params?.debugDescription))")
         logLevel.log("##############################################################")
-        
-        
+
         guard var storage = mocks[key] else {
             mocks[key] = SmockStorage()
             return registerSelectorForKey(key: key, params: params, selector: selector)
@@ -56,7 +62,6 @@ public struct Smock {
         logLevel.log("for key: \(key)")
         logLevel.log("with selector: \(selector.key())")
         logLevel.log("##############################################################")
-        
 
         guard var storage = mocks[key] else {
             mocks[key] = SmockStorage()
@@ -68,4 +73,5 @@ public struct Smock {
 
 }
 
+/// Umbrella protocol for both type and object
 public protocol Mock: MockedType, MockedObject {}

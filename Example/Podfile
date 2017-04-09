@@ -1,9 +1,0 @@
-use_frameworks!
-
-target 'Smock_Example' do
-
-  target 'Smock_Tests' do
-      inherit! :search_paths
-      pod 'Smock', :path => '../'
-  end
-end
