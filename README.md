@@ -1,8 +1,11 @@
 # Smock
 
-[![CI Status](http://img.shields.io/travis/kviksilver/Smock.svg?style=flat)](https://travis-ci.org/kviksilver/Smock)
+[![CI Status](http://img.shields.io/travis/kviksilver/Smock.svg?style=flat?branch=master)](https://travis-ci.org/kviksilver/Smock)
+[![codecov](https://codecov.io/gh/kviksilver/Smock/branch/master/graph/badge.svg)](https://codecov.io/gh/kviksilver/Smock)
 [![Version](https://img.shields.io/cocoapods/v/Smock.svg?style=flat)](http://cocoapods.org/pods/Smock)
-[![License](https://img.shields.io/cocoapods/l/Smock.svg?style=flat)](http://cocoapods.org/pods/Smock)
+[![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg)](https://swift.org)
+[![Xcode](https://img.shields.io/badge/Xcode-8.3-blue.svg)](https://developer.apple.com/xcode)
+[![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/cocoapods/p/Smock.svg?style=flat)](http://cocoapods.org/pods/Smock)
 
 Smock makes testing protocol extensions in Swift easier by providing capability to record selector calls, parameters and stub return values
