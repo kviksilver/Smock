@@ -17,7 +17,7 @@ extension ProtocolUnderTestMock {
     }
 
     func functionToImplement_params(params: String) {
-        registerSelector(#selector(functionToImplement_params(params:)), params: [params])
+        registerSelector(#selector(functionToImplement_params(params:)), params: params)
     }
 
     func functionToImplement_return() -> String {
@@ -25,7 +25,7 @@ extension ProtocolUnderTestMock {
     }
 
     func functionToImplement_params_return(params: String) -> String {
-        return registerSelector(#selector(functionToImplement_params_return), params: [params])!
+        return registerSelector(#selector(functionToImplement_params_return), params: params)!
     }
 
 }
@@ -36,7 +36,7 @@ extension ProtocolUnderTestMock {
     }
 
     static func functionToImplement_params_static(params: String) {
-        registerSelector(#selector(functionToImplement_params_static(params:)), params: [params])
+        registerSelector(#selector(functionToImplement_params_static(params:)), params: params)
     }
 
     static func functionToImplement_return_static() -> String {
@@ -44,6 +44,6 @@ extension ProtocolUnderTestMock {
     }
 
     static func functionToImplement_params_return_static(params: String) -> String {
-        return registerSelector(#selector(functionToImplement_params_return_static), params: [params])!
+        return registerSelector(#selector(functionToImplement_params_return_static), params: params)!
     }
 }

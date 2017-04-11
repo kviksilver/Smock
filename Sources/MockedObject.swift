@@ -23,8 +23,8 @@ public protocol MockedObject: class {
     ///
     /// - Parameters:
     ///   - selector: selector to register `#selector(functionSelector(params:))`
-    ///   - params: array of parameters received in function
-    func registerSelector(_ selector: Selector, params: [Any?]?)
+    ///   - params: parameters received in function
+    func registerSelector(_ selector: Selector, params: Any?...)
 
     /// Registers simple selector call and returns stubbed value
     ///
@@ -36,9 +36,9 @@ public protocol MockedObject: class {
     ///
     /// - Parameters:
     ///   - selector: selector to register `#selector(functionSelector(params:))`
-    ///   - params: array of parameters received in function
+    ///   - params: parameters received in function
     /// - Returns: value stubbed with `stubValueForSelector`
-    func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T?
+    func registerSelector<T>(_ selector: Selector, params: Any?...) -> T?
 
     /// Queries for number of calls for given selector
     ///
@@ -81,7 +81,7 @@ public extension MockedObject {
     }
 
     ///Do not implement in mock
-    func registerSelector(_ selector: Selector, params: [Any?]?) {
+    func registerSelector(_ selector: Selector, params: Any?...) {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
     }
 
@@ -91,7 +91,7 @@ public extension MockedObject {
     }
 
     ///Do not implement in mock
-    func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T? {
+    func registerSelector<T>(_ selector: Selector, params: Any?...) -> T? {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
         return stubbedValueForSelector(selector)
     }
