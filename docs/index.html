@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Smock  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Smock  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Smock Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/kviksilver/Smock"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Smock Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Smock  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/LogLevel.html">LogLevel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F5Smock22XCTAssertSelectorCallsuRxS_10MockedTyperFTMxV10ObjectiveC8SelectorSiSS4fileVs12StaticString4lineSu_T_">XCTAssertSelectorCalls(_:_:_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F5Smock22XCTAssertSelectorCallsuRxS_12MockedObjectrFTxV10ObjectiveC8SelectorSiSS4fileVs12StaticString4lineSu_T_">XCTAssertSelectorCalls(_:_:_:_:file:line:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:P5Smock4Mock">Mock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MockedObject.html">MockedObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MockedType.html">MockedType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Smock.html">Smock</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#smock' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='smock'>Smock</h1>
+
+<p><a href="https://travis-ci.org/kviksilver/Smock"><img src="http://img.shields.io/travis/kviksilver/Smock.svg?style=flat?branch=master" alt="CI Status"></a>
+<a href="https://codecov.io/gh/kviksilver/Smock"><img src="https://codecov.io/gh/kviksilver/Smock/branch/master/graph/badge.svg" alt="codecov"></a>
+<a href="http://cocoapods.org/pods/Smock"><img src="https://img.shields.io/cocoapods/v/Smock.svg?style=flat" alt="Version"></a>
+<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg" alt="Swift"></a>
+<a href="https://developer.apple.com/xcode"><img src="https://img.shields.io/badge/Xcode-8.3-blue.svg" alt="Xcode"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-red.svg" alt="MIT"></a>
+<a href="http://cocoapods.org/pods/Smock"><img src="https://img.shields.io/cocoapods/p/Smock.svg?style=flat" alt="Platform"></a></p>
+
+<p>Smock makes testing protocol extensions in Swift easier by providing capability to record selector calls, parameters and stub return values</p>
+<a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example'>Example</h2>
+
+<p>Look for <code>ProtocolUnderTest</code>, <code>ProtocolUnderTestMock</code> and <code>TestingProtocolExtensions</code> in Tests for more details.</p>
+
+<p>Basic example:</p>
+
+<p>Protocol defines following interface
+<code>Swift
+protocol ProtocolUnderTest: class {
+    func functionToTest()
+    func functionToImplement()
+}
+</code></p>
+
+<p>Extension implements <code>functionToTest</code> that calls <code>functionToImplement</code> 
+<code>Swift
+extension ProtocolUnderTest {
+    func functionToTest() {
+        functionToImplement()
+    }
+}    
+</code></p>
+
+<p>To test that extension actually does required work (on our case function call) we create a mock in test target that conforms to <code>ProtocolUnderTest</code> and <code>Mock</code> protocols, implement required <code>functionToImplement</code> as follows:</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">ProtocolUnderTestMock</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">ProtocolUnderTest</span><span class="p">,</span> <span class="kt">Mock</span> <span class="p">{}</span>
+<span class="kd">extension</span> <span class="kt">ProtocolUnderTestMock</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">functionToImplement</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">registerSelector</span><span class="p">(</span><span class="kd">#selector(</span><span class="nf">functionToImplement</span><span class="kd">)</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='cocoapods'>Cocoapods</h3>
+
+<p>Smock is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"Smock"</span>
+</code></pre>
+<a href='#swift-package-manager' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='swift-package-manager'>Swift Package Manager</h3>
+
+<p>Swift Package Manager</p>
+
+<p>To use Swift Package Manager try adding following to your Package.swift file:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"YOUR_PROJECT_NAME"</span><span class="p">,</span>
+    <span class="nv">targets</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kviksilver/Smock.git"</span><span class="p">,</span> <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="p">)</span>
+</code></pre>
+<a href='#author' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='author'>Author</h2>
+
+<p>kviksilver, <a href="mailto:berceg@gmail.com">berceg@gmail.com</a></p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>Smock is available under the MIT license. See the LICENSE file for more info.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://twitter.com/kviksilver" target="_blank" rel="external">@kviksilver</a>. All rights reserved. (Last updated: 2017-04-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
