@@ -17,7 +17,6 @@ Smock makes testing protocol extensions in Swift easier by providing capability 
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.11'
   s.tvos.deployment_target = '9.0'
-  s.watchos.deployment_target = '3.0'
 
   s.source_files = 'Sources/**/*'
   s.frameworks = 'XCTest', 'Foundation'
