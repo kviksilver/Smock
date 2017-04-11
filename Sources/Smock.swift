@@ -36,12 +36,12 @@ public struct Smock {
 
     static var mocks = [String: SmockStorage]()
 
-    static func registerSelectorForKey(key: String, params: [Any?]?, selector: Selector) {
+    static func registerSelectorForKey(key: String, params: [Any?], selector: Selector) {
 
         logLevel.log("##############################################################")
         logLevel.log("registering selector: \(selector.key())")
         logLevel.log("for key: \(key)")
-        logLevel.log("with params: \(String(describing: params?.debugDescription))")
+        logLevel.log("with params: \(String(describing: params.debugDescription))")
         logLevel.log("##############################################################")
 
         guard var storage = mocks[key] else {
@@ -50,9 +50,7 @@ public struct Smock {
         }
 
         storage.selectors[selector.key()] = (storage.selectors[selector.key()] ?? 0) + 1
-        if let parameters = params {
-            storage.params[selector.key()] = parameters
-        }
+        storage.params[selector.key()] = params
         mocks[key] = storage
     }
 

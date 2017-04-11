@@ -23,8 +23,8 @@ public protocol MockedObject: class {
     ///
     /// - Parameters:
     ///   - selector: selector to register `#selector(functionSelector(params:))`
-    ///   - params: array of parameters received in function
-    func registerSelector(_ selector: Selector, params: [Any?]?)
+    ///   - params: parameters received in function
+    func registerSelector(_ selector: Selector, params: Any?...)
 
     /// Registers simple selector call and returns stubbed value
     ///
@@ -36,9 +36,9 @@ public protocol MockedObject: class {
     ///
     /// - Parameters:
     ///   - selector: selector to register `#selector(functionSelector(params:))`
-    ///   - params: array of parameters received in function
+    ///   - params: parameters received in function
     /// - Returns: value stubbed with `stubValueForSelector`
-    func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T?
+    func registerSelector<T>(_ selector: Selector, params: Any?...) -> T?
 
     /// Queries for number of calls for given selector
     ///
@@ -79,43 +79,43 @@ public extension MockedObject {
     func registerSelector(_ selector: Selector) {
         registerSelector(selector, params: nil)
     }
-    
+
     ///Do not implement in mock
-    func registerSelector(_ selector: Selector, params: [Any?]?) {
+    func registerSelector(_ selector: Selector, params: Any?...) {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
     }
-    
+
     ///Do not implement in mock
     func registerSelector<T>(_ selector: Selector) -> T? {
         return registerSelector(selector, params: nil)
     }
-    
+
     ///Do not implement in mock
-    func registerSelector<T>(_ selector: Selector, params: [Any?]?) -> T? {
+    func registerSelector<T>(_ selector: Selector, params: Any?...) -> T? {
         Smock.registerSelectorForKey(key: key, params: params, selector: selector)
         return stubbedValueForSelector(selector)
     }
-    
+
     ///Do not implement in mock
     func numberOfCallsForSelector(_ selector: Selector) -> Int {
         return Smock.mocks[key]?.selectors[selector.key()] ?? 0
     }
-    
+
     ///Do not implement in mock
     func parametersForSelector(_ selector: Selector) -> [Any?]? {
         return Smock.mocks[key]?.params[selector.key()]
     }
-    
+
     ///Do not implement in mock
     func stubbedValueForSelector<T>(_ selector: Selector) -> T? {
         return Smock.mocks[key]?.returnValues[selector.key()] as? T
     }
-    
+
     ///Do not implement in mock
     func stubValueForSelector(_ selector: Selector, _ value: Any?) {
         Smock.stubValueForKey(key: key, selector: selector, value: value)
     }
-    
+
     ///Do not implement in mock
     func stopMocking() {
         Smock.mocks[key] = nil

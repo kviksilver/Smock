@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Smock'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Makes mocking in Swift easier'
 
   s.description      = <<-DESC
